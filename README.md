@@ -17,10 +17,6 @@ Clasifica dígitos MNIST escritos a mano con **~98% de accuracy en test**.
 └── README.md
 ```
 
-**No se versionan:** `results/` (las curvas, la matriz de confusión, los ejemplos y los pesos del
-mejor epoch) ni `teoria/`. Los resultados se regeneran solos al ejecutar el notebook; si los querés
-subir, descomentá las reglas correspondientes del `.gitignore`.
-
 **Guía de estudio:** el notebook viene **comentado línea a línea** (borrá los comentarios a medida que los entiendas).
 
 El notebook está estructurado así:
@@ -121,23 +117,3 @@ El momento en que el gradient check (backprop analítico vs. gradientes numéric
 en que entendés que no hay magia: hay cálculo, y tu cuenta coincide con la de la computadora —que sacó la misma
 derivada perturbando el peso y después voltándolo a su lugar—. La única diferencia entre hacer eso y hacer backprop
 es la velocidad.
-
-## Resultado del challenge
-
-Cada punto del enunciado, y dónde está en el notebook:
-
-- ✅ **Capa densa desde cero** — `DenseLayer` con pesos, bias, inicialización He, `forward` y `backward`.
-- ✅ **ReLU** — cachea la entrada y usa `dout * (self.x > 0)` en el backward.
-- ✅ **Softmax numéricamente estable** — resta el máximo por fila antes de exponenciar, y las filas suman 1.
-- ✅ **Cross-entropy** — promedia `−log(p + ε)` solo sobre la clase correcta; `ε = 1e-12` evita `-inf`.
-- ✅ **Backpropagation manual** — la regla de la cadena escrita a mano, sin autograd ni `.fit()`.
-- ✅ **Entrenamiento con mini-batches** — gradiente descendente con schedule de learning rate y semilla fija.
-- ✅ **Gradient check** — el backprop analítico se contrasta con derivadas numéricas: error relativo `6.8e-07`.
-- ✅ **Overfitting tratado** — curvas por epoch, `val_loss` de control, early stopping y guardado del mejor modelo.
-- ✅ **Evaluación en test** — accuracy, matriz de confusión, accuracy por clase y ejemplos de aciertos y errores.
-- ✅ **Celda de conclusiones** — qué se entiende del `.fit()` que antes no se entendía.
-
-Lo que **quedó fuera de alcance** a propósito: el bonus de Dropout y la comparación contra Keras/TensorFlow.
-No es que no se pueda —es que este notebook ya tiene suficiente material para entender la matemática sin que
-se le mezclen veinte conceptos más—. Si algún día querés meterlo, el lugar natural es después del gradient
-check, como una capa más en `build_model()`.
