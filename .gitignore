@@ -1,0 +1,35 @@
+# entorno virtual (pesa cientos de MB: nunca va al repo)
+venv/
+.venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+.jupyter/
+
+# editores / SO
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Los .gz de MNIST (~11 MB) SÍ se commitean a propósito: la celda de descarga del notebook
+# detecta que ya están en disco y no los vuelve a bajar, así la evaluación no depende de internet.
+# Para dejar el repo liviano, descomentar la línea de abajo y hacer un commit.
+# data/mnist/*.gz
+
+# Resultados: figuras PNG y pesos del modelo entrenado. Se regeneran al correr el notebook,
+# así que no se versionan.
+# OJO: esto NO borra los archivos, solo deja de trackearlos. Para subirlos, comentá estas
+# dos líneas, hacé `git add -f results/` y commit.
+results/
+
+# Apuntes personales de teoría
+teoria/
